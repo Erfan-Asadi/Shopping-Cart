@@ -1,0 +1,35 @@
+.header {
+    border-bottom: 1px solid #ececec;
+    background-color: #fff;
+    display: flex;
+    justify-content: space-between;
+    padding: 11px 24px;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    text-transform: capitalize;
+    z-index: 1;
+}
+
+.cart-toggler {
+    background-color: transparent;
+    border: 0;
+    cursor: pointer;
+    position: relative;
+}
+.cart-toggler .count {
+    position: absolute;
+    bottom: 0;
+    left: -8px;
+    width: 20px;
+    height: 20px;
+    padding-top: 2.4px;
+    background-color: rgb(247, 34, 80);
+    color: #fff;
+    font-size: 14px;
+    border-radius: 10px;
+}
+.cart-toggler svg {
+    width: 26px;
+    height: 30px;
+}

@@ -1,25 +1,34 @@
-import logo from './logo.svg';
-import './App.css';
+import React, {useState, useEffect} from "react";
+import axios from "axios";
+import Header from "./components/Header/Header";
+import './app.css'
+import ProductsList from "./components/ProductsList/ProductsList";
+import CartItemsContextProvider from "./components/contexts/cartItemsContext";
+import Cart from './components/Cart/Cart';
+import { Routes, Route, Navigate } from "react-router-dom";
+import ProductDetail from "./components/ProductDetail/ProductDetail";
 
-function App() {
+
+const App = () => {
+  const [products, setProducts] = useState([]);
+
+  useEffect(()=> {
+      axios.get('/products?limit=6')
+      .then(res => setProducts(res.data))
+  }, [])
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <>
+    <CartItemsContextProvider>
+        <Header />
+        <Routes>
+          <Route path="/cart" element={<Cart />}/>
+          <Route path="/products/:id" element={<ProductDetail products={products} />} />
+          <Route path="/products" element={<ProductsList products={products} />} />
+          <Route path="/" element={<Navigate to='/products' />} />
+        </Routes>
+    </CartItemsContextProvider>
+    </>
+  )
 }
 
-export default App;
+export default App
